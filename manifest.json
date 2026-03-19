@@ -1,0 +1,86 @@
+{
+    "name": "TrustBank - Secure Online Banking",
+    "short_name": "TrustBank",
+    "description": "Your Trusted Online Banking Partner. Secure, Fast, Reliable banking services.",
+    "start_url": "/bank.html",
+    "display": "standalone",
+    "background_color": "#1a237e",
+    "theme_color": "#1a237e",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' fill='white'>🏦</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' fill='white'>🏦</text></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "finance",
+        "business"
+    ],
+    "lang": "en",
+    "dir": "ltr",
+    "scope": "/",
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Transfer Money",
+            "short_name": "Transfer",
+            "description": "Send money to any bank account",
+            "url": "/bank.html?action=transfer",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='50' x='50%' text-anchor='middle' fill='white'>↗</text></svg>",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Buy Airtime",
+            "short_name": "Airtime",
+            "description": "Purchase airtime and data",
+            "url": "/bank.html?action=airtime",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='50' x='50%' text-anchor='middle' fill='white'>📱</text></svg>",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Check Balance",
+            "short_name": "Balance",
+            "description": "View your account balance",
+            "url": "/bank.html?action=balance",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='50' x='50%' text-anchor='middle' fill='white'>💰</text></svg>",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Pay Bills",
+            "short_name": "Bills",
+            "description": "Pay your bills",
+            "url": "/bank.html?action=bills",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='50' x='50%' text-anchor='middle' fill='white'>💡</text></svg>",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "screenshots": [],
+    "related_applications": [],
+    "theme_color": "#1a237e",
+    "background_color": "#1a237e"
+}

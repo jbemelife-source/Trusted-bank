@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description"
+        content="TrustBank - Your Trusted Online Banking Partner. Secure, Fast, Reliable banking services.">
+    <meta name="keywords" content="online banking, savings, transfers, loans, credit cards, mobile banking">
+    <meta name="author" content="TrustBank">
+    <meta name="theme-color" content="#1a237e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="TrustBank">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231a237e' width='100' height='100' rx='20'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' fill='white'>🏦</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    <title>TrustBank - Secure Online Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="bank.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="bank-logo">
+                    <i class="fas fa-university"></i>
+                    <span>TrustBank</span>
+                </div>
+                <p>Welcome back! Please login to continue</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Account Number / Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter account number" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="password-input">
+                        <input type="password" id="loginPassword" placeholder="Enter password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-btn">
+                    <span>Login to Account</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+            <div class="login-footer">
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Open Account</a></p>
+            </div>
+            <div class="demo-credentials">
+                <p><strong>Demo:</strong> Account: 1234567890 | PIN: 1234</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Banking App -->
+    <div id="bankingApp" class="banking-app hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="bank-logo">
+                    <i class="fas fa-university"></i>
+                    <span>TrustBank</span>
+                </div>
+                <button class="close-sidebar" onclick="toggleSidebar()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="accounts">
+                    <i class="fas fa-wallet"></i>
+                    <span>Accounts</span>
+                </a>
+                <a href="#" class="nav-item" data-page="transfer">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transfer</span>
+                </a>
+                <a href="#" class="nav-item" data-page="bills">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <span>Bill Payments</span>
+                </a>
+                <a href="#" class="nav-item" data-page="airtime">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Airtime & Data</span>
+                </a>
+                <a href="#" class="nav-item" data-page="cards">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Cards</span>
+                </a>
+                <a href="#" class="nav-item" data-page="loans">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Loans</span>
+                </a>
+                <a href="#" class="nav-item" data-page="invest">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Invest</span>
+                </a>
+                <a href="#" class="nav-item" data-page="history">
+                    <i class="fas fa-history"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="nav-item logout" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-btn" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="page-title">
+                        <h2 id="pageTitle">Dashboard</h2>
+                        <p id="greeting">Good morning, Customer</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <button class="notification-btn" onclick="showNotifications()">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notifBadge">3</span>
+                    </button>
+                    <div class="user-profile" onclick="showProfileMenu()">
+                        <div class="user-avatar">
+                            <span id="userInitials">JD</span>
+                        </div>
+                        <div class="user-info">
+                            <span id="userName">John Doe</span>
+                            <span id="userAccount">1234567890</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <div id="dashboardPage" class="page active">
+                <div class="dashboard-grid">
+                    <!-- Balance Card -->
+                    <div class="balance-card">
+                        <div class="balance-header">
+                            <span>Total Balance</span>
+                            <button class="eye-btn" onclick="toggleBalance()">
+                                <i class="fas fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                        <div class="balance-amount">
+                            <span id="totalBalance">₦0.00</span>
+                            <span class="hidden-balance" id="hiddenBalance">••••••••</span>
+                        </div>
+                        <div class="balance-accounts">
+                            <div class="account-item">
+                                <span class="account-type">Savings</span>
+                                <span class="account-balance" id="savingsBalance">₦0.00</span>
+                            </div>
+                            <div class="account-item">
+                                <span class="account-type">Current</span>
+                                <span class="account-balance" id="currentBalance">₦0.00</span>
+                            </div>
+                        </div>
+                        <div class="balance-actions">
+                            <button onclick="showPage('transfer')"><i class="fas fa-paper-plane"></i> Transfer</button>
+                            <button onclick="showPage('bills')"><i class="fas fa-file-invoice"></i> Pay Bills</button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="actions-grid">
+                            <div class="action-item" onclick="showPage('transfer')">
+                                <div class="action-icon"><i class="fas fa-exchange-alt"></i></div>
+                                <span>Transfer</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('airtime')">
+                                <div class="action-icon"><i class="fas fa-mobile-alt"></i></div>
+                                <span>Airtime</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('bills')">
+                                <div class="action-icon"><i class="fas fa-lightbulb"></i></div>
+                                <span>Electricity</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('cards')">
+                                <div class="action-icon"><i class="fas fa-credit-card"></i></div>
+                                <span>Cards</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('loans')">
+                                <div class="action-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                                <span>Loans</span>
+                            </div>
+                            <div class="action-item" onclick="showPage('invest')">
+                                <div class="action-icon"><i class="fas fa-chart-line"></i></div>
+                                <span>Invest</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <div class="recent-transactions">
+                        <div class="section-header">
+                            <h3>Recent Transactions</h3>
+                            <a href="#" onclick="showPage('history')">View All</a>
+                        </div>
+                        <div class="transactions-list" id="recentTransactions">
+                            <!-- Transactions will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Accounts Overview -->
+                    <div class="accounts-overview">
+                        <div class="section-header">
+                            <h3>Your Accounts</h3>
+                        </div>
+                        <div class="accounts-list" id="accountsList">
+                            <!-- Accounts will be rendered here -->
+                        </div>
+                    </div>
+
+                    <!-- Spending Chart -->
+                    <div class="spending-chart">
+                        <div class="section-header">
+                            <h3>Spending Overview</h3>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="--height: 60%">
+                                    <span>Mon</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 80%">
+                                    <span>Tue</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 45%">
+                                    <span>Wed</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 90%">
+                                    <span>Thu</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 70%">
+                                    <span>Fri</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 55%">
+                                    <span>Sat</span>
+                                </div>
+                                <div class="chart-bar" style="--height: 30%">
+                                    <span>Sun</span>
+                                </div>
+                            </div>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="dot"></span> This Week</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- News & Updates -->
+                    <div class="news-updates">
+                        <div class="section-header">
+                            <h3>News & Updates</h3>
+                        </div>
+                        <div class="news-list">
+                            <div class="news-item">
+                                <div class="news-icon"><i class="fas fa-percentage"></i></div>
+                                <div class="news-content">
+                                    <h4>New Savings Interest Rate</h4>
+                                    <p>Earn up to 10% p.a. on your savings</p>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-icon"><i class="fas fa-mobile"></i></div>
+                                <div class="news-content">
+                                    <h4>Mobile App Update</h4>
+                                    <p>New features available now!</p>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-icon"><i class="fas fa-shield-alt"></i></div>
+                                <div class="news-content">
+                                    <h4>Security Alert</h4>
+                                    <p>Never share your PIN with anyone</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accounts Page -->
+            <div id="accountsPage" class="page">
+                <div class="page-content">
+                    <div class="accounts-header">
+                        <h3>Your Accounts</h3>
+                        <button class="btn-primary" onclick="openAccountModal()">
+                            <i class="fas fa-plus"></i> Open New Account
+                        </button>
+                    </div>
+                    <div class="accounts-grid" id="accountsGrid">
+                        <!-- Accounts will be rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transfer Page -->
+            <div id="transferPage" class="page">
+                <div class="page-content">
+                    <div class="transfer-container">
+                        <div class="transfer-form">
+                            <h3>Send Money</h3>
+                            <form id="transferForm">
+                                <div class="form-group">
+                                    <label>From Account</label>
+                                    <select id="fromAccount" required>
+                                        <option value="">Select account</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Beneficiary Account Number</label>
+                                    <input type="text" id="beneficiaryAccount" placeholder="Enter account number"
+                                        maxlength="10" required>
+                                    <button type="button" class="verify-btn"
+                                        onclick="verifyBeneficiary()">Verify</button>
+                                </div>
+                                <div class="beneficiary-info hidden" id="beneficiaryInfo">
+                                    <p><strong>Name:</strong> <span id="beneficiaryName">-</span></p>
+                                    <p><strong>Bank:</strong> <span id="beneficiaryBank">-</span></p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount (₦)</label>
+                                    <input type="number" id="transferAmount" placeholder="Enter amount" min="100"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Transfer Type</label>
+                                    <select id="transferType">
+                                        <option value="instant">Instant Transfer</option>
+                                        <option value="scheduled">Scheduled Transfer</option>
+                                    </select>
+                                </div>
+                                <div class="form-group scheduled-date hidden" id="scheduledDate">
+                                    <label>Schedule Date</label>
+                                    <input type="date" id="scheduleDate">
+                                </div>
+                                <div class="form-group">
+                                    <label>Narration</label>
+                                    <input type="text" id="transferNarration" placeholder="What's this for?">
+                                </div>
+                                <div class="form-group">
+                                    <label>Transaction PIN</label>
+                                    <div class="pin-input">
+                                        <input type="password" id="transferPin" maxlength="4"
+                                            placeholder="Enter 4-digit PIN" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn-primary transfer-btn">
+                                    <i class="fas fa-paper-plane"></i> Send Money
+                                </button>
+                            </form>
+                        </div>
+                        <div class="transfer-history">
+                            <h3>Recent Transfers</h3>
+                            <div id="transferHistoryList">
+                                <!-- Transfer history will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bills Page -->
+            <div id="billsPage" class="page">
+                <div class="page-content">
+                    <div class="bills-grid">
+                        <div class="bill-category">
+                            <h3>Utilities</h3>
+                            <div class="bill-items">
+                                <div class="bill-item" onclick="showBillPayment('electricity')">
+                                    <div class="bill-icon"><i class="fas fa-lightbulb"></i></div>
+                                    <span>Electricity</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('water')">
+                                    <div class="bill-icon"><i class="fas fa-tint"></i></div>
+                                    <span>Water</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('gas')">
+                                    <div class="bill-icon"><i class="fas fa-fire"></i></div>
+                                    <span>Gas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bill-category">
+                            <h3>TV & Internet</h3>
+                            <div class="bill-items">
+                                <div class="bill-item" onclick="showBillPayment('dstv')">
+                                    <div class="bill-icon"><i class="fas fa-tv"></i></div>
+                                    <span>DSTV</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('gotv')">
+                                    <div class="bill-icon"><i class="fas fa-tv"></i></div>
+                                    <span>GOTV</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('startimes')">
+                                    <div class="bill-icon"><i class="fas fa-tv"></i></div>
+                                    <span>Startimes</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('internet')">
+                                    <div class="bill-icon"><i class="fas fa-wifi"></i></div>
+                                    <span>Internet</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bill-category">
+                            <h3>Education</h3>
+                            <div class="bill-items">
+                                <div class="bill-item" onclick="showBillPayment('school')">
+                                    <div class="bill-icon"><i class="fas fa-school"></i></div>
+                                    <span>School Fees</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('exam')">
+                                    <div class="bill-icon"><i class="fas fa-clipboard-list"></i></div>
+                                    <span>Exam Fees</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bill-category">
+                            <h3>Insurance</h3>
+                            <div class="bill-items">
+                                <div class="bill-item" onclick="showBillPayment('car')">
+                                    <div class="bill-icon"><i class="fas fa-car"></i></div>
+                                    <span>Car Insurance</span>
+                                </div>
+                                <div class="bill-item" onclick="showBillPayment('health')">
+                                    <div class="bill-icon"><i class="fas fa-heartbeat"></i></div>
+                                    <span>Health Insurance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bill Payment Modal -->
+                    <div class="bill-modal hidden" id="billModal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 id="billModalTitle">Pay Electricity Bill</h3>
+                                <button onclick="closeBillModal()"><i class="fas fa-times"></i></button>
+                            </div>
+                            <form id="billPaymentForm">
+                                <div class="form-group">
+                                    <label>Select Account</label>
+                                    <select id="billAccount" required></select>
+                                </div>
+                                <div class="form-group">
+                                    <label id="meterLabel">Meter Number</label>
+                                    <input type="text" id="meterNumber" placeholder="Enter meter number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount (₦)</label>
+                                    <input type="number" id="billAmount" placeholder="Enter amount" min="100" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="billPhone" placeholder="Enter phone number" required>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-check"></i> Pay Now
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Airtime & Data Page -->
+            <div id="airtimePage" class="page">
+                <div class="page-content">
+                    <div class="airtime-container">
+                        <div class="airtime-form">
+                            <div class="airtime-tabs">
+                                <button class="active" onclick="switchAirtimeTab('airtime')">Airtime</button>
+                                <button onclick="switchAirtimeTab('data')">Data</button>
+                            </div>
+                            <form id="airtimeForm">
+                                <div class="form-group">
+                                    <label>Select Network</label>
+                                    <div class="network-options">
+                                        <label class="network-option">
+                                            <input type="radio" name="network" value="mtn" checked>
+                                            <span>MTN</span>
+                                        </label>
+                                        <label class="network-option">
+                                            <input type="radio" name="network" value="airtel">
+                                            <span>Airtel</span>
+                                        </label>
+                                        <label class="network-option">
+                                            <input type="radio" name="network" value="glo">
+                                            <span>Glo</span>
+                                        </label>
+                                        <label class="network-option">
+                                            <input type="radio" name="network" value="9mobile">
+                                            <span>9mobile</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" id="airtimePhone" placeholder="Enter phone number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Account</label>
+                                    <select id="airtimeAccount" required></select>
+                                </div>
+                                <div class="form-group" id="airtimeAmountGroup">
+                                    <label>Amount (₦)</label>
+                                    <input type="number" id="airtimeAmount" placeholder="Enter amount" min="50"
+                                        max="5000" required>
+                                </div>
+                                <div class="form-group hidden" id="dataPlanGroup">
+                                    <label>Select Data Plan</label>
+                                    <select id="dataPlan">
+                                        <option value="500">500MB - ₦150</option>
+                                        <option value="1000">1GB - ₦300</option>
+                                        <option value="2000">2GB - ₦600</option>
+                                        <option value="5000">5GB - ₦1,500</option>
+                                        <option value="10000">10GB - ₦3,000</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Buy Now
+                                </button>
+                            </form>
+                        </div>
+                        <div class="airtime-history">
+                            <h3>Recent Recharges</h3>
+                            <div id="airtimeHistoryList">
+                                <!-- History will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Page -->
+            <div id="cardsPage" class="page">
+                <div class="page-content">
+                    <div class="cards-header">
+                        <h3>Your Cards</h3>
+                        <button class="btn-primary" onclick="showCardModal()">
+                            <i class="fas fa-plus"></i> Request New Card
+                        </button>
+                    </div>
+                    <div class="cards-grid" id="cardsGrid">
+                        <!-- Cards will be rendered here -->
+                    </div>
+
+                    <!-- Virtual Cards Section -->
+                    <div class="virtual-cards">
+                        <h3>Virtual Cards</h3>
+                        <button class="btn-secondary" onclick="createVirtualCard()">
+                            <i class="fas fa-plus"></i> Create Virtual Card
+                        </button>
+                        <div class="virtual-cards-list" id="virtualCardsList">
+                            <!-- Virtual cards will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loans Page -->
+            <div id="loansPage" class="page">
+                <div class="page-content">
+                    <div class="loans-overview">
+                        <div class="loan-summary">
+                            <h3>Loan Summary</h3>
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span>Active Loans</span>
+                                    <strong id="activeLoansCount">0</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Total Outstanding</span>
+                                    <strong id="totalOutstanding">₦0.00</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Next Payment</span>
+                                    <strong id="nextPayment">₦0.00</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Credit Score</span>
+                                    <strong id="creditScore">Excellent</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="loan-products">
+                        <h3>Available Loans</h3>
+                        <div class="loan-cards">
+                            <div class="loan-card">
+                                <div class="loan-icon"><i class="fas fa-bolt"></i></div>
+                                <h4>Quick Loan</h4>
+                                <p>Get up to ₦500,000 in minutes</p>
+                                <ul>
+                                    <li>Instant approval</li>
+                                    <li>No collateral</li>
+                                    <li>5% monthly interest</li>
+                                </ul>
+                                <button class="btn-primary" onclick="applyLoan('quick')">Apply Now</button>
+                            </div>
+                            <div class="loan-card">
+                                <div class="loan-icon"><i class="fas fa-home"></i></div>
+                                <h4>Home Loan</h4>
+                                <p>Up to ₦10,000,000 for your home</p>
+                                <ul>
+                                    <li>Long tenure</li>
+                                    <li>Low interest rate</li>
+                                    <li>Flexible repayment</li>
+                                </ul>
+                                <button class="btn-primary" onclick="applyLoan('home')">Apply Now</button>
+                            </div>
+                            <div class="loan-card">
+                                <div class="loan-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <h4>Education Loan</h4>
+                                <p>Fund your education dreams</p>
+                                <ul>
+                                    <li>Study abroad</li>
+                                    <li>4% interest rate</li>
+                                    <li>After graduation repayment</li>
+                                </ul>
+                                <button class="btn-primary" onclick="applyLoan('education')">Apply Now</button>
+                            </div>
+                            <div class="loan-card">
+                                <div class="loan-icon"><i class="fas fa-car"></i></div>
+                                <h4>Car Loan</h4>
+                                <p>Own your dream car today</p>
+                                <ul>
+                                    <li>Up to 70% financing</li>
+                                    <li>3-5 years tenure</li>
+                                    <li>Competitive rates</li>
+                                </ul>
+                                <button class="btn-primary" onclick="applyLoan('car')">Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invest Page -->
+            <div id="investPage" class="page">
+                <div class="page-content">
+                    <div class="invest-overview">
+                        <div class="invest-summary">
+                            <h3>Investment Portfolio</h3>
+                            <div class="invest-balance">
+                                <span>Total Invested</span>
+                                <strong id="totalInvested">₦0.00</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="invest-products">
+                        <h3>Investment Options</h3>
+                        <div class="invest-cards">
+                            <div class="invest-card">
+                                <div class="invest-icon"><i class="fas fa-piggy-bank"></i></div>
+                                <h4>Savings Plus</h4>
+                                <p>High-yield savings account</p>
+                                <div class="invest-rate">10% p.a.</div>
+                                <button class="btn-primary" onclick="invest('savings')">Invest Now</button>
+                            </div>
+                            <div class="invest-card">
+                                <div class="invest-icon"><i class="fas fa-certificate"></i></div>
+                                <h4>Fixed Deposit</h4>
+                                <p>Lock your money for returns</p>
+                                <div class="invest-rate">12% p.a.</div>
+                                <button class="btn-primary" onclick="invest('fixed')">Invest Now</button>
+                            </div>
+                            <div class="invest-card">
+                                <div class="invest-icon"><i class="fas fa-globe"></i></div>
+                                <h4>Treasury Bills</h4>
+                                <p>Government-backed investment</p>
+                                <div class="invest-rate">14% p.a.</div>
+                                <button class="btn-primary" onclick="invest('treasury')">Invest Now</button>
+                            </div>
+                            <div class="invest-card">
+                                <div class="invest-icon"><i class="fas fa-building"></i></div>
+                                <h4>Mutual Funds</h4>
+                                <p>Professional fund management</p>
+                                <div class="invest-rate">18% p.a.</div>
+                                <button class="btn-primary" onclick="invest('mutual')">Invest Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Page -->
+            <div id="historyPage" class="page">
+                <div class="page-content">
+                    <div class="history-header">
+                        <h3>Transaction History</h3>
+                        <div class="history-filters">
+                            <select id="historyFilter">
+                                <option value="all">All Transactions</option>
+                                <option value="debit">Debit</option>
+                                <option value="credit">Credit</option>
+                                <option value="transfer">Transfers</option>
+                                <option value="bill">Bill Payments</option>
+                            </select>
+                            <input type="date" id="historyDateFrom" placeholder="From">
+                            <input type="date" id="historyDateTo" placeholder="To">
+                        </div>
+                    </div>
+                    <div class="transactions-full" id="transactionsFull">
+                        <!-- All transactions will be rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settingsPage" class="page">
+                <div class="page-content">
+                    <div class="settings-grid">
+                        <div class="settings-section">
+                            <h3>Profile Settings</h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-user"></i>
+                                    <div>
+                                        <h4>Personal Information</h4>
+                                        <p>Update your personal details</p>
+                                    </div>
+                                </div>
+                                <button onclick="showProfileSettings()">Edit</button>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-lock"></i>
+                                    <div>
+                                        <h4>Change Password</h4>
+                                        <p>Update your login password</p>
+                                    </div>
+                                </div>
+                                <button onclick="showChangePassword()">Change</button>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-key"></i>
+                                    <div>
+                                        <h4>Transaction PIN</h4>
+                                        <p>Update your transaction PIN</p>
+                                    </div>
+                                </div>
+                                <button onclick="showChangePin()">Change</button>
+                            </div>
+                        </div>
+                        <div class="settings-section">
+                            <h3>Security</h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-fingerprint"></i>
+                                    <div>
+                                        <h4>Biometric Login</h4>
+                                        <p>Use fingerprint or face to login</p>
+                                    </div>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="biometricToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-bell"></i>
+                                    <div>
+                                        <h4>Push Notifications</h4>
+                                        <p>Receive transaction alerts</p>
+                                    </div>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="pushToggle" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-envelope"></i>
+                                    <div>
+                                        <h4>Email Notifications</h4>
+                                        <p>Receive email alerts</p>
+                                    </div>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="emailToggle" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="settings-section">
+                            <h3>Preferences</h3>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-language"></i>
+                                    <div>
+                                        <h4>Language</h4>
+                                        <p>Choose your preferred language</p>
+                                    </div>
+                                </div>
+                                <select id="languageSelect">
+                                    <option value="en">English</option>
+                                    <option value="yo">Yoruba</option>
+                                    <option value="ig">Igbo</option>
+                                    <option value="ha">Hausa</option>
+                                </select>
+                            </div>
+                            <div class="settings-item">
+                                <div class="setting-info">
+                                    <i class="fas fa-moon"></i>
+                                    <div>
+                                        <h4>Dark Mode</h4>
+                                        <p>Toggle dark theme</p>
+                                    </div>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="darkModeToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notifications Panel -->
+        <div class="notifications-panel hidden" id="notificationsPanel">
+            <div class="notifications-header">
+                <h3>Notifications</h3>
+                <button onclick="closeNotifications()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="notifications-list" id="notificationsList">
+                <!-- Notifications will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay hidden" id="modalOverlay">
+        <!-- Account Modal -->
+        <div class="modal hidden" id="accountModal">
+            <div class="modal-header">
+                <h3>Open New Account</h3>
+                <button onclick="closeModal('accountModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="openAccountForm">
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <select id="newAccountType" required>
+                        <option value="savings">Savings Account</option>
+                        <option value="current">Current Account</option>
+                        <option value="fixed">Fixed Deposit</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Initial Deposit (₦)</label>
+                    <input type="number" id="initialDeposit" placeholder="Minimum ₦1,000" min="1000" required>
+                </div>
+                <button type="submit" class="btn-primary">Open Account</button>
+            </form>
+        </div>
+
+        <!-- Card Request Modal -->
+        <div class="modal hidden" id="cardModal">
+            <div class="modal-header">
+                <h3>Request New Card</h3>
+                <button onclick="closeModal('cardModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="requestCardForm">
+                <div class="form-group">
+                    <label>Card Type</label>
+                    <select id="cardType" required>
+                        <option value="debit">Debit Card</option>
+                        <option value="credit">Credit Card</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Card Variant</label>
+                    <select id="cardVariant" required>
+                        <option value="classic">Classic</option>
+                        <option value="gold">Gold</option>
+                        <option value="platinum">Platinum</option>
+                        <option value="infinite">Infinite</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <input type="text" id="deliveryAddress" placeholder="Enter delivery address" required>
+                </div>
+                <button type="submit" class="btn-primary">Request Card</button>
+            </form>
+        </div>
+
+        <!-- Loan Modal -->
+        <div class="modal hidden" id="loanModal">
+            <div class="modal-header">
+                <h3>Apply for Loan</h3>
+                <button onclick="closeModal('loanModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="loanForm">
+                <div class="form-group">
+                    <label>Loan Amount (₦)</label>
+                    <input type="number" id="loanAmount" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label>Tenure (Months)</label>
+                    <select id="loanTenure">
+                        <option value="3">3 Months</option>
+                        <option value="6">6 Months</option>
+                        <option value="12">12 Months</option>
+                        <option value="24">24 Months</option>
+                        <option value="36">36 Months</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Purpose</label>
+                    <input type="text" id="loanPurpose" placeholder="Purpose of loan" required>
+                </div>
+                <button type="submit" class="btn-primary">Submit Application</button>
+            </form>
+        </div>
+
+        <!-- Invest Modal -->
+        <div class="modal hidden" id="investModal">
+            <div class="modal-header">
+                <h3>Make Investment</h3>
+                <button onclick="closeModal('investModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="investForm">
+                <div class="form-group">
+                    <label>Investment Type</label>
+                    <select id="investType" required>
+                        <option value="savings">Savings Plus</option>
+                        <option value="fixed">Fixed Deposit</option>
+                        <option value="treasury">Treasury Bills</option>
+                        <option value="mutual">Mutual Funds</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₦)</label>
+                    <input type="number" id="investAmount" placeholder="Minimum ₦10,000" min="10000" required>
+                </div>
+                <div class="form-group">
+                    <label>Tenure</label>
+                    <select id="investTenure">
+                        <option value="30">30 Days</option>
+                        <option value="90">90 Days</option>
+                        <option value="180">180 Days</option>
+                        <option value="365">1 Year</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Confirm Investment</button>
+            </form>
+        </div>
+
+        <!-- Change PIN Modal -->
+        <div class="modal hidden" id="changePinModal">
+            <div class="modal-header">
+                <h3>Change Transaction PIN</h3>
+                <button onclick="closeModal('changePinModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="changePinForm">
+                <div class="form-group">
+                    <label>Current PIN</label>
+                    <input type="password" id="currentPin" maxlength="4" placeholder="Enter current PIN" required>
+                </div>
+                <div class="form-group">
+                    <label>New PIN</label>
+                    <input type="password" id="newPin" maxlength="4" placeholder="Enter new PIN" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm New PIN</label>
+                    <input type="password" id="confirmNewPin" maxlength="4" placeholder="Confirm new PIN" required>
+                </div>
+                <button type="submit" class="btn-primary">Change PIN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" id="mobileBottomNav">
+        <a href="#" class="mobile-nav-item active" data-page="dashboard" onclick="showPage('dashboard'); return false;">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-page="transfer" onclick="showPage('transfer'); return false;">
+            <i class="fas fa-paper-plane"></i>
+            <span>Transfer</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-page="bills" onclick="showPage('bills'); return false;">
+            <i class="fas fa-lightbulb"></i>
+            <span>Bills</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-page="airtime" onclick="showPage('airtime'); return false;">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Airtime</span>
+        </a>
+        <a href="#" class="mobile-nav-item" data-page="more" onclick="showMobileMenu(); return false;">
+            <i class="fas fa-bars"></i>
+            <span>More</span>
+        </a>
+    </nav>
+
+    <!-- More Menu Modal -->
+    <div class="mobile-menu-modal hidden" id="mobileMenuModal">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <h3>More Services</h3>
+                <button onclick="closeMobileMenu()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mobile-menu-grid">
+                <div class="mobile-menu-item" onclick="showPage('accounts'); closeMobileMenu();">
+                    <i class="fas fa-wallet"></i>
+                    <span>Accounts</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showPage('cards'); closeMobileMenu();">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Cards</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showPage('loans'); closeMobileMenu();">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Loans</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showPage('invest'); closeMobileMenu();">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Invest</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showQRPayment(); closeMobileMenu();">
+                    <i class="fas fa-qrcode"></i>
+                    <span>QR Payment</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showUSSDPage(); closeMobileMenu();">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>USSD Codes</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showBranchLocator(); closeMobileMenu();">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Find ATM/Branch</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showPage('history'); closeMobileMenu();">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </div>
+                <div class="mobile-menu-item" onclick="showPage('settings'); closeMobileMenu();">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Payment Modal -->
+    <div class="qr-modal hidden" id="qrModal">
+        <div class="qr-content">
+            <div class="qr-header">
+                <h3>QR Payment</h3>
+                <button onclick="closeQRPayment()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="qr-body">
+                <div class="qr-display">
+                    <div class="qr-code" id="qrCode">
+                        <svg width="200" height="200" viewBox="0 0 200 200">
+                            <rect fill="#1a237e" width="200" height="200" />
+                            <rect fill="white" x="20" y="20" width="50" height="50" />
+                            <rect fill="#1a237e" x="30" y="30" width="30" height="30" />
+                            <rect fill="white" x="35" y="35" width="20" height="20" />
+                            <rect fill="#1a237e" x="40" y="40" width="10" height="10" />
+                            <rect fill="white" x="130" y="20" width="50" height="50" />
+                            <rect fill="#1a237e" x="140" y="30" width="30" height="30" />
+                            <rect fill="white" x="145" y="35" width="20" height="20" />
+                            <rect fill="#1a237e" x="150" y="40" width="10" height="10" />
+                            <rect fill="white" x="20" y="130" width="50" height="50" />
+                            <rect fill="#1a237e" x="30" y="140" width="30" height="30" />
+                            <rect fill="white" x="35" y="145" width="20" height="20" />
+                            <rect fill="#1a237e" x="40" y="150" width="10" height="10" />
+                            <rect fill="white" x="80" y="80" width="40" height="40" />
+                            <rect fill="#1a237e" x="90" y="90" width="20" height="20" />
+                        </svg>
+                    </div>
+                    <p class="qr-account">Account: <strong>1234567890</strong></p>
+                    <button class="btn-secondary" onclick="shareQRCode()">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+                <div class="scan-qr">
+                    <h4>Scan to Pay</h4>
+                    <button class="btn-primary" onclick="openScanner()">
+                        <i class="fas fa-camera"></i> Open Scanner
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- USSD Page -->
+    <div class="ussd-modal hidden" id="ussdModal">
+        <div class="ussd-content">
+            <div class="ussd-header">
+                <h3><i class="fas fa-phone-alt"></i> USSD Codes</h3>
+                <button onclick="closeUSSDPage()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="ussd-body">
+                <div class="ussd-info">
+                    <p>Dial these codes on your phone to access TrustBank services</p>
+                </div>
+                <div class="ussd-list">
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*0#</div>
+                        <div class="ussd-desc">
+                            <h4>Open Account</h4>
+                            <p>Start a new account</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*1#</div>
+                        <div class="ussd-desc">
+                            <h4>Check Balance</h4>
+                            <p>View account balance</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*2#</div>
+                        <div class="ussd-desc">
+                            <h4>Transfer Money</h4>
+                            <p>Send money to any bank</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*3#</div>
+                        <div class="ussd-desc">
+                            <h4>Buy Airtime</h4>
+                            <p>Purchase airtime</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*4#</div>
+                        <div class="ussd-desc">
+                            <h4>Pay Bills</h4>
+                            <p>Pay electricity & bills</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*5#</div>
+                        <div class="ussd-desc">
+                            <h4>Get Mini Statement</h4>
+                            <p>View last 5 transactions</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*6#</div>
+                        <div class="ussd-desc">
+                            <h4>Block Card</h4>
+                            <p>Emergency card block</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*7#</div>
+                        <div class="ussd-desc">
+                            <h4>Change PIN</h4>
+                            <p>Update transaction PIN</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*8#</div>
+                        <div class="ussd-desc">
+                            <h4>Get Loan</h4>
+                            <p>Quick loan access</p>
+                        </div>
+                    </div>
+                    <div class="ussd-item">
+                        <div class="ussd-code">*912*00#</div>
+                        <div class="ussd-desc">
+                            <h4>Customer Care</h4>
+                            <p>Speak to an agent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Branch/ATM Locator -->
+    <div class="branch-modal hidden" id="branchModal">
+        <div class="branch-content">
+            <div class="branch-header">
+                <h3><i class="fas fa-map-marker-alt"></i> Find ATM & Branch</h3>
+                <button onclick="closeBranchLocator()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="branch-body">
+                <div class="branch-search">
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="locationSearch" placeholder="Search location...">
+                    </div>
+                </div>
+                <div class="branch-map">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map"></i>
+                        <p>Map View</p>
+                    </div>
+                </div>
+                <div class="branch-list">
+                    <h4>Nearby ATMs</h4>
+                    <div class="branch-item">
+                        <div class="branch-icon"><i class="fas fa-at"></i></div>
+                        <div class="branch-info">
+                            <h5>TrustBank ATM - Lagos Island</h5>
+                            <p>Plot 123, Awolowo Road, Ikoyi</p>
+                            <span class="distance">0.5 km</span>
+                        </div>
+                        <button class="directions-btn"><i class="fas fa-directions"></i></button>
+                    </div>
+                    <div class="branch-item">
+                        <div class="branch-icon"><i class="fas fa-at"></i></div>
+                        <div class="branch-info">
+                            <h5>TrustBank ATM - Victoria Island</h5>
+                            <p>Adeyemo Alakija Street, VI</p>
+                            <span class="distance">1.2 km</span>
+                        </div>
+                        <button class="directions-btn"><i class="fas fa-directions"></i></button>
+                    </div>
+                    <div class="branch-item">
+                        <div class="branch-icon"><i class="fas fa-at"></i></div>
+                        <div class="branch-info">
+                            <h5>TrustBank ATM - Lekki</h5>
+                            <p>Lekki Expressway, Lekki Phase 1</p>
+                            <span class="distance">2.5 km</span>
+                        </div>
+                        <button class="directions-btn"><i class="fas fa-directions"></i></button>
+                    </div>
+                </div>
+                <div class="branch-list">
+                    <h4>Nearby Branches</h4>
+                    <div class="branch-item">
+                        <div class="branch-icon"><i class="fas fa-building"></i></div>
+                        <div class="branch-info">
+                            <h5>TrustBank - Head Office</h5>
+                            <p>Victoria Island, Lagos</p>
+                            <span class="distance">1.0 km</span>
+                        </div>
+                        <button class="directions-btn"><i class="fas fa-directions"></i></button>
+                    </div>
+                    <div class="branch-item">
+                        <div class="branch-icon"><i class="fas fa-building"></i></div>
+                        <div class="branch-info">
+                            <h5>TrustBank - Ikeja Branch</h5>
+                            <p>Allen Avenue, Ikeja</p>
+                            <span class="distance">3.0 km</span>
+                        </div>
+                        <button class="directions-btn"><i class="fas fa-directions"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fingerprint/FaceID Modal -->
+    <div class="biometric-modal hidden" id="biometricModal">
+        <div class="biometric-content">
+            <div class="biometric-icon">
+                <i class="fas fa-fingerprint"></i>
+            </div>
+            <h3>Biometric Login</h3>
+            <p>Use fingerprint or face to login quickly</p>
+            <button class="btn-primary" onclick="enableBiometric()">
+                <i class="fas fa-check"></i> Enable
+            </button>
+            <button class="btn-secondary" onclick="closeBiometric()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button for Mobile -->
+    <button class="fab-button hidden" id="fabButton" onclick="showQuickActions()">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Quick Actions Modal -->
+    <div class="quick-actions-modal hidden" id="quickActionsModal">
+        <div class="quick-actions-content">
+            <div class="quick-action" onclick="showPage('transfer'); closeQuickActions();">
+                <i class="fas fa-paper-plane"></i>
+                <span>Transfer</span>
+            </div>
+            <div class="quick-action" onclick="showPage('airtime'); closeQuickActions();">
+                <i class="fas fa-mobile-alt"></i>
+                <span>Airtime</span>
+            </div>
+            <div class="quick-action" onclick="showQRPayment(); closeQuickActions();">
+                <i class="fas fa-qrcode"></i>
+                <span>QR Pay</span>
+            </div>
+            <div class="quick-action" onclick="showUSSDPage(); closeQuickActions();">
+                <i class="fas fa-phone"></i>
+                <span>USSD</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Install App Banner -->
+    <div class="install-banner hidden" id="installBanner">
+        <div class="install-content">
+            <i class="fas fa-download"></i>
+            <div class="install-text">
+                <h4>Install TrustBank App</h4>
+                <p>Install for better experience</p>
+            </div>
+            <button onclick="installApp()">Install</button>
+            <button onclick="dismissInstall()"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <script src="bank.js"></script>
+
+</body>
+
+</html>
